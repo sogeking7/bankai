@@ -46,4 +46,22 @@ func main() {
 	
 	// Arrays
 	arrays()
+
+	// Map
+	maps()
+
+	// Functions
+	functions()
+
+	// Structures
+	structures()
+
+	// Interfaces
+	interfaces()
+
+	// I/O
+	io()
+
+	// WebServer
+	webserver()
 }
