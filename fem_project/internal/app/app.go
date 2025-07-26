@@ -9,6 +9,7 @@ import (
 
 	"github.com/sogeking7/femProject/internal/api"
 	"github.com/sogeking7/femProject/internal/store"
+	"github.com/sogeking7/femProject/migrations"
 )
 
 type Application struct {
@@ -25,6 +26,12 @@ func NewApplication() (*Application, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	err = store.MigrateFS(pgDB, migrations.FS, ".")
+	if err != nil {
+		panic(err)
+	}
+
 	// our handlers will go here
 	workoutHandler := api.NewWorkoutHandler()
 
