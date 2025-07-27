@@ -58,8 +58,6 @@ func (pg *PostgresWorkoutStore) CreateWorkout(workout *Workout) (*Workout, error
 		return nil, err
 	}
 
-	newWorkoutEntries []WorkoutEntry
-
 	for _, entry := range workout.Entries {
 		query := `
 		INSERT INTO workout_entries (workout_id, exercise_name, sets, reps, duration_seconds, weight, notes, order_index)
