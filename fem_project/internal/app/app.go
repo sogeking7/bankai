@@ -19,9 +19,6 @@ type Application struct {
 }
 
 func NewApplication() (*Application, error) {
-	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
-
-	// our stores will go here
 	pgDB, err := store.Open()
 	if err != nil {
 		return nil, err
@@ -31,9 +28,13 @@ func NewApplication() (*Application, error) {
 	if err != nil {
 		panic(err)
 	}
+	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
+
+	// our stores will go here
+	workoutStore := store.NewPostgresWorkoutStore(pgDB)
 
 	// our handlers will go here
-	workoutHandler := api.NewWorkoutHandler()
+	workoutHandler := api.NewWorkoutHandler(workoutStore, logger)
 
 	app := &Application{
 		Logger:         logger,
